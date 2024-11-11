@@ -11,13 +11,18 @@
 
 // Can you implement the `VehicleStatus` enum?
 
-// enum VehicleStatus
+enum VehicleStatus {
+  Available = 'Available',
+  InMaintenance = 'InMaintenance',
+  WrittenOff = 'WrittenOff'
+}
 
 // Can you extend the `Vehicle` interface with the `status` property?
 interface Vehicle {
   id: string;
   licensePlate: string;
   tareWeight: number;
+  status: VehicleStatus;
 }
 
 

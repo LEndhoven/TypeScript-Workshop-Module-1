@@ -8,16 +8,16 @@
 
 import { logText } from "../lib/log-utils";
 
-const FAVORITE_FOOD: unknown = 'Pizza';
-const SEVEN: unknown = parseInt('7');
+const FAVORITE_FOOD: string = 'Pizza';
+const SEVEN: number = parseInt('7');
 
-const THIS_SENTENCE_HAS_SIX_WORDS: unknown = 'This sentence has six words'.length === 6;
+const THIS_SENTENCE_HAS_SIX_WORDS: boolean = 'This sentence has six words'.length === 6;
 
-function multiply(a: unknown, b: unknown): unknown {
+function multiply(a: number, b: number): number {
   return a * b;
 }
 
-function isPrime(value: unknown): unknown {
+function isPrime(value: number): boolean {
   if (value <= 1) {
       return false;
   }

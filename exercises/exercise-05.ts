@@ -14,10 +14,11 @@ function factorial(n: number): number {
     throw new Error('Factorial of negative numbers is not defined');
   }
 
+  let result;
   if (n === 0) {
     result = 1;
   } else {
-    var result = n * factorial(n - 1);
+    result = n * factorial(n - 1);
   }
 
   return result;

@@ -24,7 +24,10 @@ function getMaximumWheelPressure(driveables: Driveable[]): number {
 }
 
 function isBike(item: unknown): item is Bike {
-  return !!item && typeof item === 'object' && 'brand' in item;
+  return !!item && typeof item === 'object' && 'brand' in item && typeof item.brand === 'string'
+  && 'wheelPressure' in item && typeof item.wheelPressure === 'object' && item.wheelPressure !== null
+  && 'front' in item.wheelPressure && typeof item.wheelPressure.front === 'number'
+  && 'back' in item.wheelPressure && typeof item.wheelPressure.back === 'number';
 }
 
 const allDriveables: Driveable[] = [

@@ -10,7 +10,7 @@
 import { logText } from "../lib/log-utils";
 import { range } from "./utilities";
 
-function getCongestionMatrix(numberOfLocations: unknown): unknown {
+function getCongestionMatrix(numberOfLocations: number): number[][] {
   const locationIndices = range(numberOfLocations);
 
   return locationIndices.map((locationRowIndex) => {
@@ -24,7 +24,7 @@ function getCongestionMatrix(numberOfLocations: unknown): unknown {
   })
 }
 
-function getCongestionMatrixColumn(matrix: unknown, columnIndex: unknown): unknown {
+function getCongestionMatrixColumn(matrix: number[][], columnIndex: number): number[] {
   return matrix.map((row) => row[columnIndex] ?? NaN);
 }
 

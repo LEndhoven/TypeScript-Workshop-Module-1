@@ -13,15 +13,15 @@ import { vehicleRepository, Truck, Car, Vehicle } from '../exercise-helpers/help
 
 const suitableVehicles = vehicleRepository.getVehiclesWithMaxTareWeight(2000);
 
-if (suitableVehicles === 'error') {
-  logError(suitableVehicles);
+if ('error' in suitableVehicles) {
+  logError(suitableVehicles.error);
 } else {
   showVehicles(suitableVehicles);
 }
 
 function showVehicles(vehicles: Vehicle[]): void {
   for (const vehicle of vehicles) {
-    if (vehicle === 'truck') {
+    if ('capacity' in vehicle) {
       logText(`Truck ${vehicle.licensePlate}: Tare weight of ${vehicle.tareWeight} kg, capacity of ${vehicle.capacity} kg and ${vehicle.numberOfAxles} axles`);
     } else{
       logText(`Car ${vehicle.licensePlate}: Tare weight of ${vehicle.tareWeight} kg, ${vehicle.numberOfSeats} seats and fuel type ${vehicle.fuelType}`);

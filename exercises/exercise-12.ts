@@ -25,9 +25,15 @@ interface VehicleBase {
   tareWeight: number;
 }
 
-// interface Truck
+interface Truck extends VehicleBase {
+  capacity: number;
+  numberOfAxles: number;
+}
 
-// interface Car
+interface Car extends VehicleBase {
+  numberOfSeats: number;
+  fuelType: string;
+}
 
 const vehicles: (Truck | Car)[] = [
   { id: '1', licensePlate: 'AA-123-BB', tareWeight: 1500, capacity: 1000, numberOfAxles: 2 },

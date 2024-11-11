@@ -4,15 +4,14 @@
 
 import { logItalic } from "../lib/log-utils";
 
-// Fix the compile errors by providing the correct type for the `employees` parameter in the `storeEmployeeData` function.
+// Fix the compile errors by correcting the employee data such that it matches the `employees` parameter in the `storeEmployeeData` function
 storeEmployeeData([
   ['Alice', 25],
   ['Bob', 30],
   ['Charles', 35],
-  ['David', 40, 41],
-  [45, 'Eve'],
-  ['Frank'],
-  []
+  ['David', 40],
+  ['Eve', 45],
+  ['Frank', 25], // Random age chosen
 ])
 
 
@@ -27,7 +26,7 @@ function greet(greeting: Greeting): void {
 }
 
 // Fix the compile error by correctly defining the `possibleGreetings` array.
-const possibleGreetings = ['Hello', 'Hello', 'Howdie'];
+const possibleGreetings: Greeting[] = ['Hello', 'Hello', 'Howdie'];
 for(const greeting of possibleGreetings) {
   greet(greeting);
 }

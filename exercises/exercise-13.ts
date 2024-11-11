@@ -9,9 +9,8 @@
  * In case of an error, we should not return vehicles, but return an object with an error message instead.
  */
 
-
 // Can you modify the return type of the `getVehiclesWithMaxTareWeight` method in the `VehicleRepository` interface
 // to support returning an object with an error message?
 interface VehicleRepository {
-  getVehiclesWithMaxTareWeight(maxTareWeight: number): Vehicle[];
+  getVehiclesWithMaxTareWeight(maxTareWeight: number): Vehicle[] | { error: string };
 }

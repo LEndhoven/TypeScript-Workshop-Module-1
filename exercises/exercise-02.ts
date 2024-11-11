@@ -8,9 +8,9 @@
 
 import { logText } from "../lib/log-utils";
 
-const CAPITAL_CITIES: unknown = ['Amsterdam', 'Berlin', 'Bucarest'];
+const CAPITAL_CITIES: string[] = ['Amsterdam', 'Berlin', 'Bucarest'];
 
-function planTravel(possibleLocations: unknown): unknown {
+function planTravel(possibleLocations: string[]): string {
   const startLocationIndex = Math.floor(Math.random() * possibleLocations.length);
   const finishLocationIndex = Math.floor(Math.random() * possibleLocations.length);
 

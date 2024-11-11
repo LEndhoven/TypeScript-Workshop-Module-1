@@ -48,25 +48,50 @@ function geocodeLocation(location: any): any {
 // First we will need to define types for the library response
 
 interface GeocodedAddress {
-  // Implement interface
+  address: {
+    street: string;
+    city: string | undefined;
+    postalCode: string;
+  }
 }
 
 interface GeocodedPark {
-  // Implement interface
+  park: {
+    name: string;
+    city: string;
+  }
 }
 
 interface GeocodedRiver {
-  // Implement interface
+  river: {
+    name: string;
+  }
 }
 
 // Now define the correct union type `GeocodedLocation` for the different types of locations
 // Remove `{}` and replace it with the correct union type
-type GeocodedLocation = {};
+type GeocodedLocation = GeocodedAddress | GeocodedPark | GeocodedRiver;
 
 
 /// Secondly, we need to define a custom type guard to check if a value is a GeocodedLocation
 function isGeocodedLocation(location: unknown): location is GeocodedLocation {
-  return false; // Implement type guard
+  return typeof location === 'object' && location !== null &&
+    (
+      ('address' in location && typeof location.address === 'object' && location.address !== null &&
+        'street' in location.address && typeof location.address.street === 'string' &&
+        'postalCode' in location.address && typeof location.address.postalCode === 'string' &&
+        ('city' in location.address && (typeof location.address.city === 'string' || typeof location.address.city === 'undefined'))
+      )
+      ||
+      ('park' in location && typeof location.park === 'object' && location.park !== null &&
+        'name' in location.park && typeof location.park.name === 'string' &&
+        'city' in location.park && typeof location.park.city === 'string'
+      )
+      ||
+      ('river' in location && typeof location.river === 'object' && location.river !== null &&
+        'name' in location.river && typeof location.river.name === 'string'
+      )
+    );
 }
 
 /// Lastly, we need to get rid of `any` and implement the `formatGeocodedLocation` in a safe way.
@@ -74,8 +99,14 @@ function isGeocodedLocation(location: unknown): location is GeocodedLocation {
 // - If the location is an address, return the street, postal code and the name of the city, if it exists, in upper casing
 // - If the location is a park, return the name of the park and the name of the city in upper casing
 // - If the location is a river, return the name of the river in upper casing
-function formatGeocodedLocation(geocodedLocation: any): string {
-  return `${geocodedLocation.address.street}, ${geocodedLocation.address.postalCode}, ${geocodedLocation.address.city.toUpperCase()}`;
+function formatGeocodedLocation(geocodedLocation: GeocodedLocation): string {
+  if ('address' in geocodedLocation) {
+    return `${geocodedLocation.address.street.toUpperCase()}, ${geocodedLocation.address.postalCode.toUpperCase()}, ${geocodedLocation.address.city?.toUpperCase()}`;
+  } else if ('park' in geocodedLocation) {
+    return `${geocodedLocation.park.name.toUpperCase()}, ${geocodedLocation.park.city.toUpperCase()}`;
+  }
+
+  return geocodedLocation.river.name.toUpperCase();
 }
 
 // Now adapt the `getHumanFriendlyVehicleLocations` function to use the new types and type guards and make it type safe
@@ -86,7 +117,11 @@ function getHumanFriendlyVehicleLocations(vehicles: Vehicle[], vehicleLocations:
     const lastKnownLocation = vehicleLocations.find(({vehicleId}) => id === vehicleId);
     const geocodedAddress = geocodeLocation(lastKnownLocation);
 
-    return `Vehicle "${licensePlate}" was last seen at ${formatGeocodedLocation(geocodedAddress)}`;
+    if (isGeocodedLocation(geocodedAddress)) {
+      return `Vehicle "${licensePlate}" was last seen at ${formatGeocodedLocation(geocodedAddress)}`;
+    } else {
+      return '';
+    }
   })
 }
 

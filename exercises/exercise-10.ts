@@ -25,9 +25,17 @@ interface Vehicle {
   tareWeight: number;
 }
 
-// interface VehicleRepository
+interface VehicleRepository {
+  getVehiclesWithMaxTareWeight(maxTareWeight: number): Vehicle[];
+}
 
-// class SimplifiedVehicleRepository
+class SimplifiedVehicleRepository {
+  constructor(private readonly vehicles: Vehicle[]) {}
+
+  getVehiclesWithMaxTareWeight(maxTareWeight: number): Vehicle[] {
+    return this.vehicles.filter(vehicle => vehicle.tareWeight < maxTareWeight);
+  }
+}
 
 
 const vehicles: Vehicle[] = [

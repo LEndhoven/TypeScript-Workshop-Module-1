@@ -11,35 +11,43 @@
 import { logText } from "../lib/log-utils";
 
 interface Vehicle {
-  // Implement the Vehicle interface
+  id: string;
+  licensePlate: string;
+  tareWeight: number;
 }
 
 interface VehicleLocation {
-  // Implement the VehicleLocation interface
+  vehicleId: string;
+  location: {
+    latitude: number;
+    longitude: number;
+  }
 }
 
-const vehicles: unknown = [
-  ['001', 'A-001-BC', 1200],
-  ['002', 'B-002-CD', 1500],
-  ['003', 'C-003-DE', 2000],
+const vehicles: Vehicle[] = [
+  { id: '001', licensePlate: 'A-001-BC', tareWeight: 1200 },
+  { id: '002', licensePlate: 'B-002-CD', tareWeight: 1500 },
+  { id: '003', licensePlate: 'C-003-DE', tareWeight: 2000 },
 ]
 
-const vehicleLocations: unknown = [
-  ['001', [40.7128, -74.0060]],
-  ['002', [51.5074, -0.1278]],
+const vehicleLocations: VehicleLocation[] = [
+  { vehicleId: '001', location: { latitude: 40.7128, longitude:  -74.0060 }},
+  { vehicleId: '002', location: { latitude: 51.5074, longitude:  -0.1278 }},
 ]
 
-function getHumanFriendlyVehicleLocations(vehicles: unknown, vehicleLocations: unknown): unknown {
+function getHumanFriendlyVehicleLocations(vehicles: Vehicle[], vehicleLocations: VehicleLocation[]): string[] {
   return vehicles.map((vehicle) => {
-    const [vehicleId, licensePlate] = vehicle;
-    const lastKnownLocation = vehicleLocations.find(([id]) => id === vehicleId);
+    const vehicleId = vehicle.id;
+    const licensePlate = vehicle.licensePlate;
+    const lastKnownLocation = vehicleLocations.find((vehicleLocation) => vehicleLocation.vehicleId === vehicleId);
 
     if (!lastKnownLocation) {
       return `Vehicle "${licensePlate}" has no known location`;
     }
 
-    const [, location] = lastKnownLocation;
-    const [latitude, longitude] = location;
+    const location = lastKnownLocation.location;
+    const latitude = location.latitude;
+    const longitude = location.longitude;
     return `Vehicle "${licensePlate}" was last seen at (${latitude}, ${longitude})`;
   })
 }

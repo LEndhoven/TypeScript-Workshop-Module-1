@@ -1,29 +1,23 @@
 /**
  * Exercise 06
  *
- * Below is a recursive implementation of a function that calculates the factorial of a number.
- * The function is working correctly, but it is using the `var` keyword to declare the `result` variable.
- *
+ * Below is a simple calculation to determine the number of remaining leave days an employee has.
  * Refactor the function to use the `const` keyword instead of `var`.
  */
 
 import { logText } from "../lib/log-utils";
 
-function factorial(n: number): number {
-  if (n < 0) {
-    throw new Error('Factorial of negative numbers is not defined');
+function getEmployeeRemainingLeaveDays(age: number, spentDays: number): number {
+  const leaveDays = age <= 35 ? 25 :27;
+  const remainingLeaveDays = leaveDays - spentDays;
+  if (remainingLeaveDays <= 0) {
+    return 0;
   }
 
-  if (n === 0) {
-    result = 1;
-  } else {
-    var result = n * factorial(n - 1);
-  }
-
-  return result;
+  return remainingLeaveDays;
 }
 
-logText(factorial(4).toString()); // 24
-logText(factorial(5).toString()); // 120
-logText(factorial(0).toString()); // 1
+logText(getEmployeeRemainingLeaveDays(27, 3).toString()); // 22
+logText(getEmployeeRemainingLeaveDays(37, 10).toString()); // 17
+logText(getEmployeeRemainingLeaveDays(50, 15).toString()); // 12
 
