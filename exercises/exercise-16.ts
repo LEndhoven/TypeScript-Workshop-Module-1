@@ -104,8 +104,6 @@ const vehicles: Vehicle[] = [
   { id: '010', licensePlate: 'J-010-KL' }
 ]
 
-// The vehicle locations should also be converted from tuples to objects.
-// Each vehicle location should have a `vehicleId` and a `location` property. The `location` should consist of a `latitude` and a `longitude` property.
 const vehicleLocations: VehicleLocation[] = [
   { vehicleId: '001', location: { latitude: 40.7128, longitude: -74.0060} },
   { vehicleId: '005', location: { latitude: 37.7749, longitude: -122.4194 } },
