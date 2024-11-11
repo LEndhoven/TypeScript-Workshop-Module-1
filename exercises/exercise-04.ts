@@ -4,7 +4,7 @@
 
 import { logItalic } from "../lib/log-utils";
 
-// Fix the compile errors by providing the correct type for the `employees` parameter in the `storeEmployeeData` function.
+// Fix the compile errors by correcting the employee data such that it matches the `employees` parameter in the `storeEmployeeData` function
 storeEmployeeData([
   ['Alice', 25],
   ['Bob', 30],
