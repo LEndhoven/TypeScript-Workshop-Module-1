@@ -1,1 +1,7 @@
-# TypeScript-Workshop-Module-1
+# Typescript workshop exercises
+
+## Getting started
+
+Run `npm install`
+
+Run `npm start`
